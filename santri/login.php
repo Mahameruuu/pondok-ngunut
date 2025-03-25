@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         
         if (password_verify($password, $hashedPassword)) {
-            $_SESSION['santri_id'] = $id;
-            $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $id;
+            $_SESSION['santri'] = $username;
             
             session_write_close(); // Pastikan sesi tersimpan
             header("Location: dashboard.php");

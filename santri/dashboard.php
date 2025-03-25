@@ -2,26 +2,26 @@
 session_start();
 include '../config/conn.php';
 
-// Periksa apakah admin sudah login
-if (!isset($_SESSION['admin'])) {
+// Periksa apakah santri sudah login
+if (!isset($_SESSION['santri'])) {
     header("Location: login.php");
     exit();
 }
 
-// Ambil username admin yang sedang login
-$username = $_SESSION['admin'];
+// Ambil username santri yang sedang login
+$username = $_SESSION['santri'];
 
-// Query untuk menghitung jumlah santri
-$query_berkas = "SELECT COUNT(*) AS total_berkas FROM berkas";
+// Query untuk menghitung jumlah berkas
+$query_berkas = "SELECT COUNT(*) AS total_berkas FROM berkas WHERE user_id = (SELECT id FROM users WHERE username='$username')";
 $result_berkas = mysqli_query($conn, $query_berkas);
 $row_berkas = mysqli_fetch_assoc($result_berkas);
 $total_berkas = $row_berkas['total_berkas'];
 
-// Query untuk mengambil data admin
-$query_admin = "SELECT username FROM admin WHERE username='$username'";
-$result_admin = mysqli_query($conn, $query_admin);
-$admin = mysqli_fetch_assoc($result_admin);
-$admin_name = $admin['username'];
+// Query untuk mengambil data santri
+$query_santri = "SELECT username FROM users WHERE username='$username'";
+$result_santri = mysqli_query($conn, $query_santri);
+$santri = mysqli_fetch_assoc($result_santri);
+$santri_name = $santri['username'];
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ $admin_name = $admin['username'];
             <div id="content">
                 
                 <!-- Navbar -->
-                <?php include '../components/navbar.php'?>
+                <?php include '../components/navbar_santri.php'?>
                 <!-- End of Navbar -->
 
                 <!-- Begin Page Content -->

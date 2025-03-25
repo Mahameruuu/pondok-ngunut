@@ -1,10 +1,20 @@
 <?php
 include 'config/conn.php'; 
 
+// Menampilkan Jumlah santri
 $query_santri = "SELECT COUNT(*) AS total_santri FROM santri";
 $result_santri = mysqli_query($conn, $query_santri);
 $row_santri = mysqli_fetch_assoc($result_santri);
 $total_santri = $row_santri['total_santri'];
+
+// Menampilkan Jumlah kegiatan
+$query_kegiatan = "SELECT COUNT(*) AS total_kegiatan FROM kegiatan";
+$result_kegiatan = mysqli_query($conn, $query_kegiatan);
+$row_kegiatan = mysqli_fetch_assoc($result_kegiatan);
+$total_kegiatan = $row_kegiatan['total_kegiatan'];
+
+$query = "SELECT * FROM kegiatan ORDER BY tanggal DESC";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -203,29 +213,13 @@ $total_santri = $row_santri['total_santri'];
                     <p>Santri Aktif</p>
                 </div>
           </div><!-- End Stats Item -->
-
+          
           <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-book"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="100" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Kitab yang Dipelajari</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-people"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="2000" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Alumni Berprestasi</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="bi bi-calendar-event"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="365" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Kegiatan Tahunan</p>
-            </div>
+                <i class="bi bi-mortarboard"></i>
+                <div class="stats-item">
+                    <span><?= $total_kegiatan; ?></span>
+                    <p>Kegiatan</p>
+                </div>
           </div><!-- End Stats Item -->
 
         </div>
@@ -235,7 +229,7 @@ $total_santri = $row_santri['total_santri'];
     </section><!-- /Stats Section -->
 
     <!-- Partners Section -->
-    <section id="partners" class="clients section light-background">
+    <!-- <section id="partners" class="clients section light-background">
 
       <div class="container">
 
@@ -283,7 +277,7 @@ $total_santri = $row_santri['total_santri'];
 
       </div>
 
-    </section><!-- /Partners Section -->
+    </section>/Partners Section -->
 
     <!-- Layanan Pondok -->
     <section id="layanan" class="services section">
@@ -519,43 +513,21 @@ $total_santri = $row_santri['total_santri'];
         <p><span>Dokumentasi&nbsp;</span> <span class="description-title">Kegiatan Pondok</span></p>
       </div><!-- End Section Title -->
 
+      <!-- Menampilkan daftar kegiatan -->
       <div class="container">
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">Semua</li>
-            <li data-filter=".filter-kegiatan">Kegiatan Santri</li>
-            <li data-filter=".filter-fasilitas">Fasilitas</li>
-            <li data-filter=".filter-prestasi">Prestasi</li>
-          </ul><!-- End Filters -->
-
-          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-kegiatan">
-              <img src="assets/img/galeri/kegiatan-1.jpg" class="img-fluid" alt="Kegiatan Mengaji">
-              <div class="portfolio-info">
-                <h4>Mengaji</h4>
-                <p>Santri sedang mengaji bersama</p>
-                <a href="assets/img/galeri/kegiatan-1.jpg" data-gallery="portfolio-gallery-kegiatan" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              </div>
-            </div><!-- End Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-fasilitas">
-              <img src="assets/img/galeri/fasilitas-1.jpg" class="img-fluid" alt="Ruang Belajar">
-              <div class="portfolio-info">
-                <h4>Ruang Belajar</h4>
-                <p>Fasilitas ruang belajar santri</p>
-                <a href="assets/img/galeri/fasilitas-1.jpg" data-gallery="portfolio-gallery-fasilitas" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              </div>
-            </div><!-- End Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-prestasi">
-              <img src="assets/img/galeri/prestasi-1.jpg" class="img-fluid" alt="Juara Lomba Tahfidz">
-              <div class="portfolio-info">
-                <h4>Juara Lomba Tahfidz</h4>
-                <p>Santri meraih juara dalam lomba Tahfidz</p>
-                <a href="assets/img/galeri/prestasi-1.jpg" data-gallery="portfolio-gallery-prestasi" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              </div>
-            </div><!-- End Item -->
-          </div><!-- End Container -->
+            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item">
+                        <img src="kegiatan/uploads/<?= $row['gambar']; ?>" class="img-fluid" alt="<?= $row['judul']; ?>">
+                        <div class="portfolio-info">
+                            <h4><?= $row['judul']; ?></h4>
+                            <p><?= $row['deskripsi']; ?></p>
+                            <a href="uploads/<?= $row['gambar']; ?>" data-gallery="portfolio-gallery" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+            </div>
         </div>
       </div>
     </section><!-- /Galeri Kegiatan Pondok -->
@@ -620,7 +592,7 @@ $total_santri = $row_santri['total_santri'];
       </div>
     </section><!-- /Biaya Pendidikan Pondok -->
 
-    <!-- Contact Section -->
+    <!-- Kontak Section -->
     <section id="kontak" class="contact section">
 
       <!-- Section Title -->
