@@ -12,16 +12,10 @@ if (!isset($_SESSION['admin'])) {
 $username = $_SESSION['admin'];
 
 // Query untuk menghitung jumlah santri
-$query_santri = "SELECT COUNT(*) AS total_santri FROM santri";
-$result_santri = mysqli_query($conn, $query_santri);
-$row_santri = mysqli_fetch_assoc($result_santri);
-$total_santri = $row_santri['total_santri'];
-
-// Query untuk menghitung jumlah santri
-$query_kegiatan = "SELECT COUNT(*) AS total_kegiatan FROM kegiatan";
-$result_kegiatan = mysqli_query($conn, $query_kegiatan);
-$row_kegiatan = mysqli_fetch_assoc($result_kegiatan);
-$total_kegiatan = $row_kegiatan['total_kegiatan'];
+$query_berkas = "SELECT COUNT(*) AS total_berkas FROM berkas";
+$result_berkas = mysqli_query($conn, $query_berkas);
+$row_berkas = mysqli_fetch_assoc($result_berkas);
+$total_berkas = $row_berkas['total_berkas'];
 
 // Query untuk mengambil data admin
 $query_admin = "SELECT username FROM admin WHERE username='$username'";
@@ -41,7 +35,7 @@ $admin_name = $admin['username'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Santri - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="../assets/vendor_admin/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -60,7 +54,7 @@ $admin_name = $admin['username'];
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include '../components/sidebar.php'; ?>
+        <?php include '../components/sidebar_santri.php'; ?>
         <!-- End of Sidebar -->
         
         <!-- Content Wrapper -->
@@ -78,45 +72,25 @@ $admin_name = $admin['username'];
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Santri Card -->
+                        <!-- Berkas Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Santri</div>
+                                                Berkas</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    <?php echo $total_santri; ?> Orang
+                                                    <?php echo $total_berkas; ?> Berkas
                                                 </div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                                                <i class="fas fa-file fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                        <!-- Kegiatan Card -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Kegiatan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo $total_kegiatan; ?> Kegiatan
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
 

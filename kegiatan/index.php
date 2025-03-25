@@ -19,26 +19,8 @@ $admin = mysqli_fetch_assoc($result_admin);
 // Pastikan admin memiliki data
 $admin_name = $admin ? $admin['username'] : "Unknown Admin";
 
-// Jika ada request untuk mengaktifkan akun
-if (isset($_GET['activate_id'])) {
-    $id = intval($_GET['activate_id']);
-    $query_activate = "UPDATE santri SET status='active' WHERE id=$id";
-    mysqli_query($conn, $query_activate);
-    header("Location: ../santri/index.php");
-    exit();
-}
-
-// Jika ada request untuk menonaktifkan akun
-if (isset($_GET['deactivate_id'])) {
-    $id = intval($_GET['deactivate_id']);
-    $query_deactivate = "UPDATE santri SET status='rejected' WHERE id=$id";
-    mysqli_query($conn, $query_deactivate);
-    header("Location: ../santri/index.php");
-    exit();
-}
-
-// Query untuk mengambil data santri dengan kolom yang diperlukan
-$result = mysqli_query($conn, "SELECT * FROM santri");
+// Query untuk mengambil data kegiatan
+$result = $conn->query("SELECT * FROM kegiatan ORDER BY tanggal DESC");
 ?>
 
 <!DOCTYPE html>
@@ -67,54 +49,39 @@ $result = mysqli_query($conn, "SELECT * FROM santri");
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
-                    <h1 class="h3 mb-2 text-gray-800">Data Pendaftaran Santri</h1>
-                    <a href="../santri/pendaftaran.php" class="btn btn-primary mb-3">Tambah Santri</a>
+                    <h1 class="h3 mb-2 text-gray-800">Daftar Kegiatan</h1>
+                    <a href="tambah.php" class="btn btn-primary mb-3">Tambah Kegiatan</a>
                     
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Santri</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Kegiatan</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Gambar</th>
+                                        <th>Judul</th>
+                                        <th>Deskripsi</th>
+                                        <th>Tanggal</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php while ($row = $result->fetch_assoc()): ?>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nama</th>
-                                            <th>Tanggal Lahir</th>
-                                            <th>Alamat</th>
-                                            <th>Kontak</th>
-                                            <th>Program</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Status</th>
+                                            <td><img src="uploads/<?= $row['gambar']; ?>" width="100"></td>
+                                            <td><?= $row['judul']; ?></td>
+                                            <td><?= $row['deskripsi']; ?></td>
+                                            <td><?= $row['tanggal']; ?></td>
+                                            <td>
+                                                <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                                <a href="delete.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                                            <tr>
-                                                <td><?= $row['id']; ?></td>
-                                                <td><?= $row['nama']; ?></td>
-                                                <td><?= $row['tanggal_lahir']; ?></td>
-                                                <td><?= $row['alamat']; ?></td>
-                                                <td><?= $row['kontak']; ?></td>
-                                                <td><?= $row['program']; ?></td>
-                                                <td><?= $row['jenis_kelamin']; ?></td>
-                                                <td>
-                                                    <?php if ($row['status'] == 'active') { ?>
-                                                        <a href="?deactivate_id=<?= $row['id']; ?>" class="btn btn-danger btn-sm">
-                                                            <i class="fas fa-times"></i> Nonaktifkan
-                                                        </a>
-                                                    <?php } else { ?>
-                                                        <a href="?activate_id=<?= $row['id']; ?>" class="btn btn-success btn-sm">
-                                                            <i class="fas fa-check"></i> Aktifkan
-                                                        </a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

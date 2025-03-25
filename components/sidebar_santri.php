@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <img src="" alt="">
         </div>
-        <div class="sidebar-brand-text mx-3">Admin Pondok Ngunut</div>
+        <div class="sidebar-brand-text mx-3">Santri Pondok Ngunut</div>
     </a>
 
     <!-- Divider -->
@@ -17,25 +17,17 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="../admin/index.php">
+        <a class="nav-link" href="../santri/dashboard.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
-    <!-- Nav Item - Santri -->
+    <!-- Nav Item - Berkas -->
     <li class="nav-item active">
-        <a class="nav-link" href="../santri/index.php">
+        <a class="nav-link" href="../berkas/index.php">
             <i class="fas fa-user"></i>
-            <span>Santri</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - Kegiatan -->
-    <li class="nav-item active">
-        <a class="nav-link" href="../kegiatan/index.php">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Kegiatan</span>
+            <span>Berkas</span>
         </a>
     </li>
 

@@ -1,7 +1,7 @@
 <?php
 include 'config/conn.php'; 
 
-$query_santri = "SELECT COUNT(*) AS total_santri FROM pendaftaran_santri";
+$query_santri = "SELECT COUNT(*) AS total_santri FROM santri";
 $result_santri = mysqli_query($conn, $query_santri);
 $row_santri = mysqli_fetch_assoc($result_santri);
 $total_santri = $row_santri['total_santri'];
@@ -87,7 +87,7 @@ $total_santri = $row_santri['total_santri'];
             <h1>Selamat Datang <span>Pondok Ngunut</span></h1>
             <p>Pondok Ngunut adalah tempat untuk belajar dan mengembangkan diri dengan nilai-nilai keislaman.</p>
             <div class="d-flex">
-              <a href="login.php" climgss="btn-get-started">Daftar Sekarang</a>
+              <a href="santri/login.php" climgss="btn-get-started">Daftar Sekarang</a>
               <a href="https://youtu.be/CGaHoNbSi6Q" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Lihat Video</span></a>
             </div>
           </div>
