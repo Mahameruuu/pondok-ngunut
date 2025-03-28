@@ -17,11 +17,17 @@ $result_santri = mysqli_query($conn, $query_santri);
 $row_santri = mysqli_fetch_assoc($result_santri);
 $total_santri = $row_santri['total_santri'];
 
-// Query untuk menghitung jumlah santri
+// Query untuk menghitung jumlah kegiatan
 $query_kegiatan = "SELECT COUNT(*) AS total_kegiatan FROM kegiatan";
 $result_kegiatan = mysqli_query($conn, $query_kegiatan);
 $row_kegiatan = mysqli_fetch_assoc($result_kegiatan);
 $total_kegiatan = $row_kegiatan['total_kegiatan'];
+
+// Query untuk menghitung jumlah pesan
+$query_pesan = "SELECT COUNT(*) AS total_pesan FROM kontak";
+$result_pesan = mysqli_query($conn, $query_pesan);
+$row_pesan = mysqli_fetch_assoc($result_pesan);
+$total_pesan = $row_pesan['total_pesan'];
 
 // Query untuk mengambil data admin
 $query_admin = "SELECT username FROM admin WHERE username='$username'";
@@ -112,6 +118,26 @@ $admin_name = $admin['username'];
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pesan Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Pesan</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $total_pesan; ?> Pesan
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-envelope fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

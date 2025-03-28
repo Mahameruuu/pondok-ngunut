@@ -637,7 +637,7 @@ $result = mysqli_query($conn, $query);
           </div>
 
           <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="kontak/proses.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -681,7 +681,6 @@ $result = mysqli_query($conn, $query);
   </main>
 
   <footer id="footer" class="footer">
-
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
@@ -696,43 +695,42 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Menu</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#hero">Profil</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#about">Tentang</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#layanan">Layanan</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#ustadz">Ustadz</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#kegiatan">Kegiatan</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#biaya">Biaya Pendidikan</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4>Sekolah</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#sekolah">Sekolah</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">SD</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">SMP</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">SMA</a></li>
           </ul>
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>Follow Us</h4>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+          <h4>Sosial Media</h4>
+          <p>Ikuti media sosial kami untuk informasi terbaru</p>
           <div class="social-links d-flex">
             <a href="https://www.youtube.com/@PondokNgunut"><i class="bi bi-youtube"></i></a>
             <a href="https://web.facebook.com/SMKIsunankalijaga/"><i class="bi bi-facebook"></i></a>
             <a href="https://www.instagram.com/pphmsuka/"><i class="bi bi-instagram"></i></a>
-            <!-- <a href=""><i class="bi bi-linkedin"></i></a> -->
           </div>
         </div>
-
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Pondok Ngunut</strong> <span>All Rights Reserved</span></p>
     </div>
-
   </footer>
 
   <!-- Scroll Top -->

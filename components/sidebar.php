@@ -38,5 +38,13 @@
             <span>Kegiatan</span>
         </a>
     </li>
+    
+    <!-- Nav Item - Pesan -->
+    <li class="nav-item active">
+        <a class="nav-link" href="../kontak/index.php">
+            <i class="fas fa-envelope"></i>
+            <span>Pesan</span>
+        </a>
+    </li>
 
 </ul>

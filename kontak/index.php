@@ -38,7 +38,9 @@ if (isset($_GET['deactivate_id'])) {
 }
 
 // Query untuk mengambil data santri dengan kolom yang diperlukan
-$result = mysqli_query($conn, "SELECT * FROM santri");
+$result = $conn->query("SELECT * FROM kontak ORDER BY id DESC");
+
+$no = 1;
 ?>
 
 <!DOCTYPE html>
@@ -67,12 +69,11 @@ $result = mysqli_query($conn, "SELECT * FROM santri");
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
-                    <h1 class="h3 mb-2 text-gray-800">Data Pendaftaran Santri</h1>
-                    <a href="../santri/pendaftaran.php" class="btn btn-primary mb-3">Tambah Santri</a>
+                    <h1 class="h3 mb-2 text-gray-800">Data Pesan</h1>
                     
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Santri</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Pesan</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -81,37 +82,21 @@ $result = mysqli_query($conn, "SELECT * FROM santri");
                                         <tr>
                                             <th>ID</th>
                                             <th>Nama</th>
-                                            <th>Tanggal Lahir</th>
-                                            <th>Alamat</th>
-                                            <th>Kontak</th>
-                                            <th>Program</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Status</th>
+                                            <th>Email</th>
+                                            <th>Subjek</th>
+                                            <th>Pesan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                                        <?php while ($row = $result->fetch_assoc()) { ?>
                                             <tr>
-                                                <td><?= $row['id']; ?></td>
-                                                <td><?= $row['nama']; ?></td>
-                                                <td><?= $row['tanggal_lahir']; ?></td>
-                                                <td><?= $row['alamat']; ?></td>
-                                                <td><?= $row['kontak']; ?></td>
-                                                <td><?= $row['program']; ?></td>
-                                                <td><?= $row['jenis_kelamin']; ?></td>
-                                                <td>
-                                                    <?php if ($row['status'] == 'active') { ?>
-                                                        <a href="?deactivate_id=<?= $row['id']; ?>" class="btn btn-danger btn-sm">
-                                                            <i class="fas fa-times"></i> Nonaktifkan
-                                                        </a>
-                                                    <?php } else { ?>
-                                                        <a href="?activate_id=<?= $row['id']; ?>" class="btn btn-success btn-sm">
-                                                            <i class="fas fa-check"></i> Aktifkan
-                                                        </a>
-                                                    <?php } ?>
-                                                </td>
+                                                <td><?= $no; ?></td> <!-- Menampilkan nomor urut -->
+                                                <td><?= htmlspecialchars($row['nama']); ?></td>
+                                                <td><?= htmlspecialchars($row['email']); ?></td>
+                                                <td><?= htmlspecialchars($row['subjek']); ?></td>
+                                                <td><?= htmlspecialchars($row['pesan']); ?></td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php $no++; } ?>
                                     </tbody>
                                 </table>
                             </div>

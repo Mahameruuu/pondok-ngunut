@@ -116,7 +116,7 @@ $result = $conn->query("SELECT * FROM kegiatan ORDER BY tanggal DESC");
                 <div class="modal-body">Pilih "Logout" di bawah jika Anda ingin mengakhiri sesi saat ini.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout.php">Logout</a>
+                    <a class="btn btn-primary" href="../admin/logout.php">Logout</a>
                 </div>
             </div>
         </div>
